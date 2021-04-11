@@ -32,12 +32,15 @@ public class RegistrationController {
             return "registration";
         }
 
-        user.setActive(true);
-        user.setRoles(Collections.singleton(Role.USER));
+        else {
 
-        userRepo.save(user);
+            user.setActive(true);
+            user.setRoles(Collections.singleton(Role.USER));
 
-        return "redirect:/login";
+            userRepo.save(user);
+
+            return "redirect:/login";
+        }
     }
 
 }
