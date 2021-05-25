@@ -17,12 +17,24 @@
     <a class="btn btn-primary m-3" data-bs-toggle="collapse" href="#collapseExample" role="button"
        aria-expanded="false"
        aria-controls="collapseExample">Add new message</a>
-    <div class="collapse" id="collapseExample">
+    <div class="collapse <#if message??>show</#if>" id="collapseExample">
         <form method="post" enctype="multipart/form-data">
             <div class="form-group">
-                <input type="text" class="form-control mb-3" name="text" placeholder="Введите сообщение">
+                <input type="text" class="form-control ${(textError??)?string('is-invalid', '')}  mb-3"
+                       value="<#if message??>${message.text}</#if>" name="text" placeholder="Введите сообщение">
+                <#if textError??>
+                    <div class="invalid-feedback">
+                        ${textError}
+                    </div>
+                </#if>
             </div>
-            <input type="text" class="form-control" name="tag" placeholder="Введите тэг">
+            <input type="text" class="form-control"
+                   value="<#if message??>${message.tag}</#if>" name="tag" placeholder="Введите тэг">
+            <#if tagError??>
+                <div class="invalid-feedback">
+                    ${tagError}
+                </div>
+            </#if>
             <div class="form-group">
                 <div class="custom-file mt-3">
                     <input class="form-control" type="file" name="file" id="customFile">

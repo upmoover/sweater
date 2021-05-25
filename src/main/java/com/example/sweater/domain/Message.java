@@ -1,6 +1,8 @@
 package com.example.sweater.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "Message")
@@ -9,7 +11,10 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank(message = "Please, fill the message")
+    @Size(max = 2048, message = "Message too long (more than 2 kB)")
     private String text;
+    @Size(max = 255, message = "Message too long (more than 255)")
     private String tag;
 
     @ManyToOne(fetch = FetchType.EAGER)
