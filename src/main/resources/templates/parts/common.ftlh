@@ -2,17 +2,18 @@
     <!DOCTYPE html>
     <html lang="en">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="UTF-8"/>
         <title>Sweater</title>
-        <link rel="stylesheet" href="/static/style.css">
+        <link rel="stylesheet" href="/static/style.css"/>
 
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-              crossorigin="anonymous">
-        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+              crossorigin="anonymous"/>
+        <script src="https://www.google.com/recaptcha/api.js"></script>
+<#--        <script src="https://www.google.com/recaptcha/api.js" async defer></script>-->
     </head>
     <body>
     <#include "navbar.ftlh">

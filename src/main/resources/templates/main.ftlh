@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col">
                     <input type="text" name="filter" class="form-control" value="${filter?ifExists}"
-                           placeholder="Search by tag">
+                           placeholder="Search by tag"/>
                 </div>
                 <div class="col">
                     <button type="submit" class="btn btn-primary mb-3">Search</button>
