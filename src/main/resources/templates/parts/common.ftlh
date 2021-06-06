@@ -14,8 +14,9 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
               crossorigin="anonymous"/>
-        <script src="https://www.google.com/recaptcha/api.js"></script>
+        <script defer src="https://www.google.com/recaptcha/api.js"></script>
 <#--        <script src="https://www.google.com/recaptcha/api.js" async defer></script>-->
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js"></script>
     </head>
     <body>
     <#include "navbar.ftlh">

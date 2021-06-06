@@ -67,28 +67,29 @@ public class MainController {
             @Valid Message message,
             BindingResult bindingResult,
             Model model,
+            @RequestParam(required = false, defaultValue = "") String filter,
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
         message.setAuthor(user);
 
         if (bindingResult.hasErrors()) {
+            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
 
-            Map<String, String> errorMap = ControllerUtils.getErrors(bindingResult);
-            model.mergeAttributes(errorMap);
+            model.mergeAttributes(errorsMap);
             model.addAttribute("message", message);
         } else {
-
             saveFile(message, file);
 
             model.addAttribute("message", null);
+
             messageRepo.save(message);
         }
 
-        Iterable<Message> messages = messageRepo.findAll();
+        Page<MessageDto> page = messageService.messageList(pageable, filter, user);
+        model.addAttribute("page", page);
 
-        model.addAttribute("messages", messages);
-
-        return "main";
+        return "redirect:/main";
     }
 
     private void saveFile(@Valid Message message, @RequestParam("file") MultipartFile file) throws IOException {
@@ -114,19 +115,18 @@ public class MainController {
             @PathVariable User author,
             Model model,
             @RequestParam(required = false) Message message,
-            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageble
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
     ) {
 
-        Page<MessageDto> page = messageService.messageListForUsers(pageble, currentUser, author);
+        Page<MessageDto> page = messageService.messageListForUsers(pageable, currentUser, author);
 
         model.addAttribute("subscriptionCount", author.getSubscriptions().size());
         model.addAttribute("subscribersCount", author.getSubscribers().size());
         model.addAttribute("userChannel", author);
-        model.addAttribute("page", page);
         model.addAttribute("isSubscriber", author.getSubscribers().contains(currentUser));
         model.addAttribute("isCurrentUser", currentUser.equals(author));
         model.addAttribute("message", message);
-        model.addAttribute("url", "/user-messages/"+author.getId());
+        model.addAttribute("url", "/user-messages/" + author.getId());
         model.addAttribute("page", page);
 
         return "userMessages";
